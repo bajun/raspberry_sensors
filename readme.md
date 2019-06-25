@@ -1,6 +1,7 @@
 ## Raspberry Sensors
 
 This repository contains script for obtaining data from Adafruit DHT sensor (https://www.adafruit.com/product/385) and mh-z19 sensor (https://revspace.nl/MHZ19)
+It's using `aiohttp` as web-framework for rendering results and websocket connection, `Chart.js` for building graphics and specific libs for read from sensors _(I'm too lazy to play with GPIO, yeah)_ 
 
 **Tested on Python 3.6 version.**
 
