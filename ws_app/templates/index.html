@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Some graphics</title>
+    <link rel="stylesheet" href="{{ url('static', filename='main.css') }}">
+    <script type="text/javascript" src="{{ url('static', filename='main.js')}}"></script>
+    <script type="text/javascript" src="{{ url('static', filename='Chart.min.js')}}"></script>
+
+</head>
+<body>
+<canvas id="co2" height="450" width="800"></canvas>
+<canvas id="humidity" height="450" width="800"></canvas>
+
+<script type="text/javascript">
+
+    var data = {{ data|safe }};
+    co2Data = data.map(function(item){return item[0]})
+    humidityData = data.map(function(item){return item[2]})
+    timeLabels = data.map(function(item){
+        return new Date(item[3]*1000).toLocaleString();
+    })
+
+    var lineChartDataCo2 = {
+        labels: timeLabels,
+        datasets: [{
+            label: "CO2",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: co2Data
+        }, ]
+    }
+    var lineChartDataHumidity = {
+        labels: timeLabels,
+        datasets: [{
+            label: "Humidity",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#000",
+            pointHighlightFill: "#000",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: humidityData
+        }, ]
+    }
+
+    var options = {
+        responsive: true,
+        scaleShowGridLines: false,
+        scaleLineColor: "rgba(0,0,0,.1)",
+    }
+
+    window.chart_с02 = new Chart(document.getElementById("co2").getContext("2d"), {
+        type: 'line',
+        data: lineChartDataCo2,
+        options: options
+    });
+    window.chart_humidity = new Chart(document.getElementById("humidity").getContext("2d"), {
+        type: 'line',
+        data: lineChartDataHumidity,
+        options: options
+    });
+
+</script>
+</body>
+</html>

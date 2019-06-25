@@ -1,0 +1,14 @@
+[Unit]
+Description=Sensors client part
+After=network.target
+
+[Service]
+ExecStart=/home/pi/sensors/.venv/bin/python3 -u ws_client/grab_sensors.py
+WorkingDirectory=/home/pi/sensors/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

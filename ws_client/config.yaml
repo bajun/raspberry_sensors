@@ -1,0 +1,6 @@
+HOST: '0.0.0.0'
+PORT: 8080
+ADAFRUIT_SENSOR_TYPE: 22
+ADAFRUIT_SENSOR_PIN: 4
+FREQUENCY: 600
+DB_PATH: '/home/pi/sensors/ws_app/sensors.db'

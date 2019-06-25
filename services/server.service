@@ -1,0 +1,14 @@
+[Unit]
+Description=Sensors server part
+After=network.target
+
+[Service]
+ExecStart=/home/pi/sensors/.venv/bin/python -u ws_app/main.py
+WorkingDirectory=/home/pi/sensors/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
