@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             lineChartDataCo2.datasets[0].data.push(received_msg['co2']);
             lineChartDataHumidity.datasets[0].data.push(received_msg['humidity']);
+            lineChartDataTemperature.datasets[0].data.push(received_msg['temperature']);
             var time = new Date(received_msg['time']*1000).toLocaleString();
 		// We using common labels, so pushing one time
             lineChartDataCo2.labels.push(time)
 
             window.chart_с02.update();
             window.chart_humidity.update();
+            window.chart_temperature.update();
 
         };
 
