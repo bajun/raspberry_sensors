@@ -14,11 +14,13 @@
 <body>
 <canvas id="co2" height="450" width="800"></canvas>
 <canvas id="humidity" height="450" width="800"></canvas>
+<canvas id="temperature" height="450" width="800"></canvas>
 
 <script type="text/javascript">
 
     var data = {{ data|safe }};
     co2Data = data.map(function(item){return item[0]})
+    temperatureData = data.map(function(item){return item[1]})
     humidityData = data.map(function(item){return item[2]})
     timeLabels = data.map(function(item){
         return new Date(item[3]*1000).toLocaleString();
@@ -50,7 +52,19 @@
             data: humidityData
         }, ]
     }
-
+    var lineChartDataTemperature = {
+        labels: timeLabels,
+        datasets: [{
+            label: "Temperature",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#000",
+            pointHighlightFill: "#000",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: temperatureData
+        }, ]
+    }
     var options = {
         responsive: true,
         scaleShowGridLines: false,
@@ -67,6 +81,12 @@
         data: lineChartDataHumidity,
         options: options
     });
+    window.chart_temperature = new Chart(document.getElementById("temperature").getContext("2d"), {
+        type: 'line',
+        data: lineChartDataTemperature,
+        options: options
+    });
+
 
 </script>
 </body>

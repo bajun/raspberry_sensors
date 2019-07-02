@@ -1,5 +1,5 @@
 """ Views and service functions for them"""
-
+import datetime
 import json
 from typing import Any, Dict
 
@@ -37,8 +37,14 @@ class Handlers:
         :param request: incoming request
         :return:
         """
+        now = datetime.datetime.utcnow()
+        last_moment = now - datetime.timedelta(hours=12)
+        last_moment = last_moment.isoformat()
+        query = (f"SELECT * FROM main.testimony "
+                    f"WHERE time >= {last_moment}"
+                    f"ORDER BY time ASC")
         async with aiosqlite.connect(request.app.config["DB_PATH"]) as database:
-            async with database.execute("SELECT * FROM (SELECT * FROM main.testimony ORDER BY time DESC LIMIT 10) ORDER BY time ASC") as cursor:
+            async with database.execute(query) as cursor:
                 rows = await cursor.fetchall()
 
         return {"data": json.dumps(rows)}
