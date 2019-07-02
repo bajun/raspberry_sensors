@@ -41,7 +41,7 @@ class Handlers:
         last_moment = now - datetime.timedelta(hours=12)
         last_moment = last_moment.isoformat()
         query = (f"SELECT * FROM main.testimony "
-                    f"WHERE time <= {last_moment}"
+                    f"WHERE time >= {last_moment}"
                     f"ORDER BY time ASC")
         async with aiosqlite.connect(request.app.config["DB_PATH"]) as database:
             async with database.execute(query) as cursor:
