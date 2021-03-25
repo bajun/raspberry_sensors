@@ -5,4 +5,4 @@ Jinja2==2.10.1
 aiosqlite==0.10.0
 Adafruit_DHT==1.4.0
 typing==3.6.6
-PyYAML==5.1.1
+PyYAML==5.4
